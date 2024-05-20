@@ -8,11 +8,17 @@ export class LessonResolver {
   constructor(
     private lessonService: LessonService
   ) {}
+
   @Query(_returns => LessonType)
   Lesson(
     @Args('id') id: string
   ) {
     return this.lessonService.getLesson(id);
+  }
+
+  @Query(_returns => [LessonType])
+  allLessons() {
+    return this.lessonService.getAllLessons();
   }
 
   @Mutation(_returns => LessonType)
