@@ -7,7 +7,6 @@ import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class StudentService {
-
   constructor(
     @InjectRepository(Student)
     private studentRepository: Repository<Student>
@@ -21,6 +20,14 @@ export class StudentService {
       lastName
     });
     return this.studentRepository.save(student);
+  }
+
+  async getAllStudents(): Promise<Student[]> {
+    return this.studentRepository.find();
+  }
+
+  async getStudent(id: string): Promise<Student> {
+    return this.studentRepository.findOne({ where: { id: id }})
   }
 
 }
