@@ -9,8 +9,8 @@ import { CreateLessonInput } from './lesson.input';
 export class LessonService {
   constructor(
     @InjectRepository(Lesson)
-    private lessonRepository: Repository<Lesson>
-  ) {}  
+    private lessonRepository: Repository<Lesson>,
+  ) {}
 
   async createLesson(createLessonInput: CreateLessonInput): Promise<Lesson> {
     const { name, startDate, endDate } = createLessonInput;
@@ -18,9 +18,9 @@ export class LessonService {
       id: uuid(),
       name,
       startDate,
-      endDate
+      endDate,
     });
-    return this.lessonRepository.save(lesson)
+    return this.lessonRepository.save(lesson);
   }
 
   async getAllLessons(): Promise<Lesson[]> {
@@ -29,6 +29,12 @@ export class LessonService {
 
   async getLesson(id: string): Promise<Lesson> {
     return this.lessonRepository.findOne({ where: { id: id } });
+  }
+
+  async assignStudentsToLesson(lessonId: string, studentId: string[]): Promise<Lesson> {
+    const lesson = await this.lessonRepository.findOne({ where: { id: lessonId } })
+    lesson.students = [...lesson.students, ...studentId];
+    return this.lessonRepository.save(lesson);
   }
 
 }

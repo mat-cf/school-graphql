@@ -8,7 +8,7 @@ export class StudentResolver {
   constructor(
     private studentService: StudentService
   ) {}
-
+ 
   @Query(_returns => StudentType)
   student(
     @Args('id') id: string
@@ -27,6 +27,5 @@ export class StudentResolver {
   ) {
     return this.studentService.createStudent(createStudentInput);
   }
-
 
 }

@@ -10,21 +10,18 @@ import { Student } from './student/student.entity';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
-    driver: ApolloDriver,
-    autoSchemaFile: true,
-  }), 
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+    }),
     LessonModule,
     TypeOrmModule.forRoot({
       type: 'mongodb',
       url: 'mongodb://localhost/school',
-      entities: [
-        Lesson,
-        Student
-      ],
+      entities: [Lesson, Student],
       synchronize: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     }),
-    StudentModule
+    StudentModule,
   ],
   controllers: [],
   providers: [],

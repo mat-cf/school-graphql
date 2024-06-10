@@ -9,15 +9,17 @@ import { v4 as uuid } from 'uuid';
 export class StudentService {
   constructor(
     @InjectRepository(Student)
-    private studentRepository: Repository<Student>
+    private studentRepository: Repository<Student>,
   ) {}
 
-  async createStudent(createStudentInput: CreateStudentInput): Promise<Student> {
+  async createStudent(
+    createStudentInput: CreateStudentInput,
+  ): Promise<Student> {
     const { firstName, lastName } = createStudentInput;
     const student = this.studentRepository.create({
       id: uuid(),
       firstName,
-      lastName
+      lastName,
     });
     return this.studentRepository.save(student);
   }
@@ -27,7 +29,6 @@ export class StudentService {
   }
 
   async getStudent(id: string): Promise<Student> {
-    return this.studentRepository.findOne({ where: { id: id }})
+    return this.studentRepository.findOne({ where: { id: id } });
   }
-
 }

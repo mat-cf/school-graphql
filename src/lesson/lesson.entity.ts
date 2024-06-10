@@ -1,4 +1,4 @@
-import { Column, Entity, ObjectIdColumn, PrimaryColumn } from "typeorm";
+import { Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Lesson {
@@ -16,4 +16,7 @@ export class Lesson {
 
   @Column()
   endDate: string;
+
+  @Column()
+  students: string[];
 }
